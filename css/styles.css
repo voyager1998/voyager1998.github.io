@@ -3,7 +3,7 @@ body {
 }
 
 form {
-	max-width: 500px;
+	max-width: 3000px;
 	margin: 0 auto;
 }
 
@@ -64,7 +64,7 @@ h1, h2, h3 {
 
 .navbar-brand {
 	font-weight: 800;
-	font-size: 1.5rem;
+	font-size: 1rem;
 	letter-spacing: 0.5px;
 }
 
@@ -83,7 +83,7 @@ h1, h2, h3 {
 }
 
 .navbar-toggler-right {
-	right: 0rem;
+	right: 0;
 }
 
 .portfolio-img {
@@ -107,7 +107,7 @@ h1, h2, h3 {
   float: left;
   overflow: hidden;
   position: relative;
-  text-align: center;
+  text-align: center; /*center*/
 }
 
 .hovereffect .overlay {
@@ -161,7 +161,7 @@ h1, h2, h3 {
 .page-nav {
 	width: 50%;
 	margin: 0 auto;
-	text-align: center;
+	text-align: center;/*center*/
 }
 .page-nav a,span {
 	font-size: 1.3rem;
