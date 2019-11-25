@@ -11,8 +11,7 @@ Computer Science BSE, University of Michigan
 
 Electrical and Computer Engineering BSE, Shanghai Jiao Tong University
 
-Street Photographer
-
+Roboticist
 
 <html>
 <body>

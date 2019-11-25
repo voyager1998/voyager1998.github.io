@@ -16,18 +16,18 @@ cover_image: images/373_diagram.png
 >
 > <p align="right"> --- <i>Prof. Alanson Sample and Prof. Matt Smith, the University of Michigan</i></p>
 
-**>>> *This project is developed together with [Regina (Jingliang Ren)](https://regina8023.github.io), [Ken (Kun Huang)](https://voyager1998.github.io) and Shiyu Liu.***
-**>>> *This post is written in shared effort with [Regina (Jingliang Ren)](https://regina8023.github.io).***
+**>>> *This project is developed together with [Jingliang Ren](https://regina8023.github.io), [Zhihao Ruan](https://shineyruan.github.io) and Shiyu Liu.***
+**>>> *This webpage is developed by [Jingliang Ren](https://regina8023.github.io) and [Zhihao Ruan](https://shineyruan.github.io)***
 **>>> *Special thanks to them for all their contributions!***
 <!--more-->
 
 In the passing winter semester, I took a very interesting course: [*Introduction to Embedded System Design (EECS 373)*](http://www.eecs.umich.edu/courses/eecs373/lectures.html). I've learnt memory-mapped I/O, interrupt, timer and many other important concepts in embedded system. The target of this course is to build an embedded system using a specific kind of development board -- [Actel SmartFusion&reg; SoC FPGA](https://en.wikipedia.org/wiki/Actel_SmartFusion).
 
-Our final project is "Step on the White Tiles", which is inspired by a popular mobile game *Don't Tap the White Tiles (Chinese: 别踩白块)*. This is one of my proudest projects, so I'd like to write a blog to record this project experience and share these fun technical details with more people!
+Our final project is "Step on the White Tiles", which is inspired by a popular mobile game *Don't Tap the White Tiles*. This is one of my proudest projects, so I'd like to write a blog to record this project experience and share these fun technical details with more people!
 
 # Background: Interactive Gaming
 
-Interactive gaming system has been developing fast for the past decades. From the Wii Remote controller created by Nintendo to the PlayStation series controller invented by Sony, it seems that people has become more and more fascinated about interactive gaming. Inspired by the existing interactive gaming system solutions, I, along with [Regina (Jingliang Ren)](https://regina8023.github.io), [Ken (Kun Huang)](https://voyager1998.github.io) and Shiyu Liu planned to develop a simple interactive gaming system based on [Actel SmartFusion&reg; SoC FPGA](https://www.microsemi.com/product-directory/soc-fpgas/1693-smartfusion), which is a simple implementation of a popular mobile game *Don't Tap the White Tiles* into the real world.
+Interactive gaming system has been developing fast for the past decades. From the Wii Remote controller created by Nintendo to the PlayStation series controller invented by Sony, it seems that people has become more and more fascinated about interactive gaming. Inspired by the existing interactive gaming system solutions, I, along with [Jingliang Ren](https://regina8023.github.io), [Zhihao Ruan](https://shineyruan.github.io) and Shiyu Liu planned to develop a simple interactive gaming system based on [Actel SmartFusion&reg; SoC FPGA](https://www.microsemi.com/product-directory/soc-fpgas/1693-smartfusion), which is a simple implementation of a popular mobile game *Don't Tap the White Tiles* into the real world.
 
 ![A basic user interface for the original mobile game, Don't Tap the White Tiles.](/images/373_intro.png)
 
@@ -423,5 +423,4 @@ All source codes with the latest updates can be accessed in my [GitHub repositor
 For the entire work, I would like to express special thanks to:
 
 * Prof. Sample and Prof. Smith's support throughout the semester ☕️🥃
-* my teammates: Shiyu, Regina and Ken's efforts on this project 🍦🍻
-* my own passion 🍗🍺
+* my teammates: Shiyu, Jingliang and Zhihao's efforts on this project 🍦🍻
