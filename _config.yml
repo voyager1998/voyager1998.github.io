@@ -3,13 +3,19 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: Kun Huang
 subtitle:
-description:
+description: Street Photographer, Computer Science
 keywords:
-author: John Doe
-language:
+author: Kun Huang
+language: English
 timezone:
+
+# Header
+menu:
+  About : /About
+  Contact: /Contact
+  Instagram: https://www.instagram.com/kunhwang9806/
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -73,7 +79,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: edinburgh
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
