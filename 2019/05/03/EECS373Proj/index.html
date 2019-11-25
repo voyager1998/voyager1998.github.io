@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Head tag -->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Title -->
+  
+  <title>An Interactive Game &amp;mdash; Step On the White Tiles! - Kun Huang</title>
+
+  <!--Favicon-->
+  <link rel="icon" href="favicon/favicon.ico">
+
+  <!--Description-->
+  
+      <meta name="description" content="Street Photographer, Computer Science">
+  
+
+  <!--Author-->
+  
+      <meta name="author" content="Kun Huang">
+  
+
+  <!-- Pure CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Open+Sans:300,800" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/styles.css">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+
+  <body>
+  	<div class="container-fluid navbar-container m-sm-5">
+      <!-- Header -->
+      <nav class="navbar navbar-toggleable-sm navbar-light px-1 py-3 my-3 mb-sm-5">
+  <a class="navbar-brand ml-2" href="/">Kun Huang</a>
+  <button class="navbar-toggler navbar-toggler-right py-2" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse text-center" id="navbarCollapse">
+    <ul class="navbar-nav ml-auto my-auto">
+      
+        <li class="nav-item">
+          <a class="nav-link" href="/About">About</a>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" href="/Contact">Contact</a>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.instagram.com/kunhwang9806/">Instagram</a>
+        </li>
+      
+    </ul>
+    <hr class="hidden-md-up">
+  </div>
+</nav>
+
+
+  		<div class="row">
+  			<div class="col-12 mb-4">
+  <img class="img-fluid project-img" src="/images/unsplash.jpg" alt="An Interactive Game &mdash; Step On the White Tiles!">
+</div>
+<div class="col-lg-1 col-12 pt-3 px-4 pr-lg-5">
+  <h1>An Interactive Game &mdash; Step On the White Tiles!</h1>
+</div>
+<div class="col-lg-12 col-12 pt-lg-3 mb-4 pl-lg-5 px-lg-0 px-4 portfolio-content">
+  <blockquote>
+<p>Probably one of the best interactive game projects I have seen in the class.</p>
+<p align="right"> — <i>Prof. Alanson Sample and Prof. Matt Smith, the University of Michigan</i></p>
+</blockquote>
+<p><strong>&gt;&gt;&gt; <em>This project is developed together with <a href="https://regina8023.github.io" target="_blank" rel="noopener">Regina (Jingliang Ren)</a>, <a href="https://voyager1998.github.io" target="_blank" rel="noopener">Ken (Kun Huang)</a> and Shiyu Liu.</em></strong><br><strong>&gt;&gt;&gt; <em>This post is written in shared effort with <a href="https://regina8023.github.io" target="_blank" rel="noopener">Regina (Jingliang Ren)</a>.</em></strong><br><strong>&gt;&gt;&gt; <em>Special thanks to them for all their contributions!</em></strong><br><a id="more"></a></p>
+<p>In the passing winter semester, I took a very interesting course: <a href="http://www.eecs.umich.edu/courses/eecs373/lectures.html" target="_blank" rel="noopener"><em>Introduction to Embedded System Design (EECS 373)</em></a>. I’ve learnt memory-mapped I/O, interrupt, timer and many other important concepts in embedded system. The target of this course is to build an embedded system using a specific kind of development board – <a href="https://en.wikipedia.org/wiki/Actel_SmartFusion" target="_blank" rel="noopener">Actel SmartFusion&reg; SoC FPGA</a>.</p>
+<p>Our final project is “Step on the White Tiles”, which is inspired by a popular mobile game <em>Don’t Tap the White Tiles (Chinese: 别踩白块)</em>. This is one of my proudest projects, so I’d like to write a blog to record this project experience and share these fun technical details with more people!</p>
+<h1 id="Background-Interactive-Gaming"><a href="#Background-Interactive-Gaming" class="headerlink" title="Background: Interactive Gaming"></a>Background: Interactive Gaming</h1><p>Interactive gaming system has been developing fast for the past decades. From the Wii Remote controller created by Nintendo to the PlayStation series controller invented by Sony, it seems that people has become more and more fascinated about interactive gaming. Inspired by the existing interactive gaming system solutions, I, along with <a href="https://regina8023.github.io" target="_blank" rel="noopener">Regina (Jingliang Ren)</a>, <a href="https://voyager1998.github.io" target="_blank" rel="noopener">Ken (Kun Huang)</a> and Shiyu Liu planned to develop a simple interactive gaming system based on <a href="https://www.microsemi.com/product-directory/soc-fpgas/1693-smartfusion" target="_blank" rel="noopener">Actel SmartFusion&reg; SoC FPGA</a>, which is a simple implementation of a popular mobile game <em>Don’t Tap the White Tiles</em> into the real world.</p>
+<p><img src="/images/373_intro.png" alt="A basic user interface for the original mobile game, Don&#39;t Tap the White Tiles."></p>
+<h1 id="Game-Rules"><a href="#Game-Rules" class="headerlink" title="Game Rules"></a>Game Rules</h1><p>There are 3 modes for our game: slow, medium and fast. Different modes have different numbers and speeds of tiles. At the beginning of the game, player will have 5 lives (health points).</p>
+<ul>
+<li>🍭 When left foot steps on a white tile, white tile becomes green and score++</li>
+<li>🍭 When left foot steps on a white tile, white tile becomes red and score++</li>
+<li>🌶 When player misses a white tile, he/she will lose one life (health point)</li>
+<li>☠️ When all lives go, game over!</li>
+</ul>
+<h1 id="Demo-Videos"><a href="#Demo-Videos" class="headerlink" title="Demo Videos"></a>Demo Videos</h1><p>Here is a video captured during EECS373 Project Expo 😎!</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2wzuU-qfCKQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h1 id="Technical-Details"><a href="#Technical-Details" class="headerlink" title="Technical Details"></a>Technical Details</h1><p>In the following part, I will be introducing in detail how to build this cool interactive gaming system! As mentioned before, in this project we’re using Actel SmartFusion&reg; SoC FPGA.</p>
+<h2 id="Component-Overview"><a href="#Component-Overview" class="headerlink" title="Component Overview"></a>Component Overview</h2><p><img src="/images/373_diagram.png" alt></p>
+<p>As indicated in the graph, we use one SmartFusion&reg; board to control 5 main peripherals:</p>
+<ul>
+<li>Nintendo controller and LCD display for calibration Pixy camera, setting game mode, controlling start and pause</li>
+<li>Projector controlled by VGA signal for projecting moving tiles, score, left health point</li>
+<li>Pixy camera for detecting if player’s feet are on white tiles</li>
+<li>Sound board for playing background music and sound effect</li>
+</ul>
+<h2 id="Code-Environments"><a href="#Code-Environments" class="headerlink" title="Code Environments"></a>Code Environments</h2><p>As for the project developing environment, we’re using <a href="https://www.microsemi.com/product-directory/design-resources/1750-libero-soc" target="_blank" rel="noopener">Libero SoC Design Software</a> as well as <a href="https://www.microsemi.com/product-directory/design-tools/4879-softconsole#overview" target="_blank" rel="noopener">Microsemi SoftConsole</a>. The specific versions are:</p>
+<ul>
+<li>Libero SoC v11.9 SP3</li>
+<li>Microsemi SoftConsole v3.4</li>
+<li>Windows 10 Pro 1809 (operating system)</li>
+</ul>
+<p><strong>Note that Libero SoC is neither forward nor backward compatible.</strong> A Libero SoC v11.9 project is not compatible with a Libero SoC v11.9 SP3 project.</p>
+<h2 id="Memory-mapped-I-O-amp-Advanced-Peripheral-Bus"><a href="#Memory-mapped-I-O-amp-Advanced-Peripheral-Bus" class="headerlink" title="Memory-mapped I/O &amp; Advanced Peripheral Bus"></a>Memory-mapped I/O &amp; Advanced Peripheral Bus</h2><p>In common sense, every memory address in a CPU corresponds to some place which can store data (aka “real memory”). However, in embedded systems, each input/output (I/O) device also corresponds to a specific memory address in the core. For these addresses, each of them has been mapped to an I/O device instead of “real memory”, such as Analog-to-Digital Converter (ADC), Digital-to-Analog Converter (DAC), General-Purpose I/O (GPIO) pins, etc. Accessing these addresses through CPU is actually accessing their corresponding I/O devices.</p>
+<p>APB (Advanced Peripheral Bus) is used as an interface to access these peripherals. A typical APB consists of the following signal (by naming convention):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Signal Name</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>PRDATA</code></td>
+<td>Data line where CPU reads from the peripheral.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>PWDATA</code></td>
+<td>Data line where CPU writes to the peripheral.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>PWRITE</code></td>
+<td>Indicates whether it is a <strong>read</strong> or a <strong>write</strong> transaction.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>PENABLE</code></td>
+<td>Indicates whether CPU has started the transaction.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>PSEL</code></td>
+<td>Indicates whether CPU has selected this peripheral.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>PADDR</code></td>
+<td>Indicates what address CPU has chosen to interact with.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>PCLK</code></td>
+<td>Clock signal from CPU.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>PREADY</code></td>
+<td><strong>Controlled by peripheral;</strong> indicates whether peripheral has been prepared for the transaction.</td>
+</tr>
+</tbody>
+</table>
+<p>By convention, in terms of APB, the CPU is called “master” while the peripherals are called “slaves”. While signals are generally high/low voltages which is in essence a hardware issue, APB makes generating these signals with C code possible.</p>
+<p><img src="/images/373_apb.png" alt="A diagram of how we&#39;re making use of APB in our interactive game."></p>
+<h3 id="Implementation-in-Verilog"><a href="#Implementation-in-Verilog" class="headerlink" title="Implementation in Verilog"></a>Implementation in Verilog</h3><p>While in most microcontrollers APB is not able to be modified because it is a very complicated circuit network soldered onto the PCB, with an FPGA we can take full advantage of that and customize our own APB. In Verilog, we can simply make use of an unused memory address and create the following module (APB interface):</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> apb_interface(</span><br><span class="line">        <span class="keyword">input</span> PCLK,                 <span class="comment">// clock</span></span><br><span class="line">        <span class="keyword">input</span> PRESERN,              <span class="comment">// system reset</span></span><br><span class="line"><span class="comment">// APB3 BUS INTERFACE</span></span><br><span class="line">        <span class="keyword">input</span> PSEL,                 <span class="comment">// peripheral select</span></span><br><span class="line">        <span class="keyword">input</span> PENABLE,              <span class="comment">// distinguishes access phase</span></span><br><span class="line">        <span class="keyword">output</span> <span class="keyword">wire</span> PREADY,         <span class="comment">// peripheral ready signal</span></span><br><span class="line">        <span class="keyword">output</span> <span class="keyword">wire</span> PSLVERR,        <span class="comment">// error signal</span></span><br><span class="line">        <span class="keyword">input</span> PWRITE,               <span class="comment">// read/write control bit</span></span><br><span class="line">        <span class="keyword">input</span> [<span class="number">31</span>:<span class="number">0</span>] PADDR,         <span class="comment">// IO address</span></span><br><span class="line">        <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">31</span>:<span class="number">0</span>] PWDATA,   <span class="comment">// (processor) bus is writing data to</span></span><br><span class="line">                                    <span class="comment">// this device 32 bits</span></span><br><span class="line">        <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">31</span>:<span class="number">0</span>] PRDATA,   <span class="comment">// (processor) bus is reading data from this device</span></span><br><span class="line">        <span class="comment">/*** Your Code (inputs &amp; outputs) ***/</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> PSLVERR  = <span class="number">0</span>;    <span class="comment">// assumes no error generation</span></span><br><span class="line"><span class="keyword">assign</span> PREADY   = <span class="number">1</span>;    <span class="comment">// assumes zero wait</span></span><br><span class="line"><span class="keyword">wire</span> write_enable   = (PENABLE &amp;&amp; PWRITE &amp;&amp; PSEL);  <span class="comment">//decodes APB3 write cycle</span></span><br><span class="line"><span class="keyword">wire</span> read_enable    = (!PWRITE &amp;&amp; PSEL);            <span class="comment">//decode APB3 read cycle</span></span><br><span class="line"><span class="comment">// ****** Your code ******</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<p>We can see that all the I/O ports in the Verilog module has to strictly follow the APB convention mentioned above.</p>
+<h2 id="VGA"><a href="#VGA" class="headerlink" title="VGA"></a>VGA</h2><p>VGA is short for <em>Video Graphics Array</em>. Although it is a relatively aged display method (introduced by IBM in 1987), its frequency (60Hz per frame) is good enough for our display purpose.</p>
+<h3 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h3><p><img src="/images/373_vga_pin.png" alt></p>
+<p>A VGA cable has 15 pins, 6 of them are used in the project:</p>
+<ul>
+<li>Blue, Red, Green represent color for one pixel</li>
+<li>Horizontal sync and vertical sync are used to define the ends of each line and the whole frame</li>
+<li>GND for ground</li>
+</ul>
+<p>A VGA video is a <strong>stream</strong> of frames. Each frame is made up of a series of horizontal lines, and each line is made up of a series of pixels.</p>
+<p>At the beginning, there will be a scan point on top left corner of the frame. In each clock period, we should output correct RGB value for current pixel.  And the scan point will go to the next pixel. When it comes to the end of a line, the Horizontal-Sync signal will go low.</p>
+<p>Then the scan point goes line by line. When it comes to the end of the frame, the Vertical-Sync will go low.</p>
+<p>Till now, we refresh the whole frame for one time.</p>
+<p><img src="/images/373_vga_timing.png" alt></p>
+<p>In a word, to project a desired video, we just need to <strong>output correct RGB signal for each pixel in sequence</strong>.</p>
+<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><p>The main logic for VGA display is implemented in C code: it determines the positions of tiles, scores and health point; then writes these information in specific APB addresses. Verilog code is only for analyzing information from these APB addresses and generating corresponding signals.</p>
+<p>A 60-Hz interrupt will be generated periodically in fabric. In <code>main.c</code>,</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__attribute__((interrupt)) <span class="function"><span class="keyword">void</span> <span class="title">Fabric_IRQHandler</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>is interrupt handler, which is responsible for refresh of the whole frame.</p>
+<h4 id="Moving-Tiles"><a href="#Moving-Tiles" class="headerlink" title="Moving Tiles"></a>Moving Tiles</h4><p>There are 8 tiles in maximum in one frame. To make them look as random as possible, I randomly generate 3 attributes for each tile:</p>
+<ul>
+<li><strong>length</strong></li>
+<li><strong>the column</strong> inside which it will move</li>
+<li><strong>delay</strong> for interval between the time when a tile goes out of the frame and when it reappears at the top of the frame.</li>
+</ul>
+<p>In <code>vga.c</code>,</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">random_mode</span><span class="params">(<span class="keyword">int</span> k)</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>controls the new position of kth tile based on its old position.</p>
+<p>Besides, the attribute, <strong><code>left_on</code></strong>, <strong><code>right_on</code></strong>, will control color of the tile. When it is set to <code>true</code> inside <code>pixy.c</code>, the color will turn green or red.</p>
+<h4 id="Score-amp-Health-Point"><a href="#Score-amp-Health-Point" class="headerlink" title="Score &amp; Health Point"></a>Score &amp; Health Point</h4><p>Once <strong><code>left_on</code></strong> or <strong><code>right_on</code></strong> is set to <code>true</code> inside <code>pixy.c</code>, the variable, <strong><code>score</code></strong>, will add one.</p>
+<p>If <strong><code>left_on</code></strong> and <strong><code>right_on</code></strong> are <code>false</code> until the tile goes out of the frame, one life will lose.</p>
+<p>The display of score 🔢 and heart ❤️ are hard-coded in Verilog. Another way to show them is using Sprites + SRAM (see below).</p>
+<h3 id="Showing-More-Complicated-Graphs"><a href="#Showing-More-Complicated-Graphs" class="headerlink" title="Showing More Complicated Graphs"></a>Showing More Complicated Graphs</h3><p>Although the display for this game is fairly simple, we tried using <a href="https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Sprite_(computer_graphics" target="_blank" rel="noopener">Sprites</a>.html) and SRAM, which is used for complicated graphics (but didn’t use it in final version of project).</p>
+<p>The idea behind Sprites is that generate RGB values for each pixel in a picture; and then store them in SRAM of microcontroller; read RGB value for corresponding pixel from SRAM when scan point comes to the pixel.</p>
+<p><img src="/images/373_sram.png" alt></p>
+<p>The SRAM module inside SmartFusion&reg; is shown above. Pull up <code>r_en</code> when you are reading from it, pull up <code>w_en</code> when you are writing to it.</p>
+<p>However, there are two annoying issues when I implemented it:</p>
+<ul>
+<li>Timing. When use APB and SRAM, timing of these two things need to be considered carefully. The <code>PREADY</code> cannot be set to high all the time since SRAM need one clock period to finish reading/writing. So <code>PREADY</code> should be delayed for one clock period.</li>
+<li>Memory limitation. The total size of SRAM inside SmartFusion&reg; is only 64kB.</li>
+</ul>
+<h2 id="Nintendo-Controller"><a href="#Nintendo-Controller" class="headerlink" title="Nintendo Controller"></a>Nintendo Controller</h2><p>For the controller for the user menu selection, we’re using a classic Nintendo&reg; NES controller. This is a relatively aged controller, but its signal is easy to decode and it’s sufficient for our design.</p>
+<p><img src="/images/373Proj_controller_overview.jpg" alt></p>
+<p>We can see that it consists of 8 buttons: Up, Down, Left, Right, Select, Start, A and B.</p>
+<p>For more details, <a href="http://uzebox.org/files/NES-controller-Hydra-Ch6All-v1.0.pdf" target="_blank" rel="noopener">a document that I have referred to</a> when programming the NES controller says that:</p>
+<blockquote>
+<p>The Nintendo Entertainment System or NES, also known as the Nintendo Family Computer (Famicom) was released in Japan in 1983 and shortly after in the USA in 1985. The system was even more successful than the Atari 2600 and more or less put the last stake in the heart of Atari home consoles forever. The NES sold more than 60,000,000 units worldwide in its heyday and still sells to this day (I just bought 4 of them from eStarland.com)! There are over 200 clones of the system in circulation and the word “Nintendo” is used in many cultures as a youth slang term with many “varied” meanings.</p>
+<p>The system itself was nothing compared to the Propeller chip’s computing power, the NES was powered by the 8-bit 6502 running at 1.79 MHz, but the NES did have quite a bit of dedicated graphics hardware making it quite a contender in the 8-bit era, it sported multiple tile maps, graphics planes, sprites, sound, and a lot more.</p>
+<p align="right"> — <i>“Game Programming for the Propeller Powered HYDRA”</i>, pp. 95 </p>
+</blockquote>
+<h3 id="Interfacing-the-Nintendo-NES-controller"><a href="#Interfacing-the-Nintendo-NES-controller" class="headerlink" title="Interfacing the Nintendo NES controller"></a>Interfacing the Nintendo NES controller</h3><p>On the back of the NES controller, it is actually organized as the following figure shows.</p>
+<p><img src="/images/373Proj_controller_back.jpg" alt="An inside view of an NES controller."></p>
+<p>We can see that there’re five wires: brown, red, orange, yellow, white. The functions of these wires are summarized below.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Signal Name</th>
+<th style="text-align:center">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>GND</code></td>
+<td style="text-align:center">Brown</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>clock</code></td>
+<td style="text-align:center">Red</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>latch</code></td>
+<td style="text-align:center">Orange</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>data_out</code></td>
+<td style="text-align:center">Yellow</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>5V</code></td>
+<td style="text-align:center">White</td>
+</tr>
+</tbody>
+</table>
+<p>The states of the 8 buttons (pressed/not pressed) will be provided at the <code>data_out</code> line, bit by bit. The <code>latch</code> and the <code>clock</code> line are used to control the clocking of the <code>data_out</code> data line. In order to get the button states from the NES controller, we need to perform the following steps.</p>
+<ol>
+<li>Set the clock of the MCU to be greater than or equal to $12\mu\rm{s}$.</li>
+<li>Set <code>latch</code> line to LOW.</li>
+<li>Set <code>clock</code> line to LOW. Now, we’re in a known state.</li>
+<li>Pulse <code>latch</code> line HIGH for at least 2 cycles. This will latch the data into the shift register.</li>
+<li>Read the bits in from <code>data_out</code> line. The first bit will be available after the latching process.</li>
+<li>Pulse <code>clock</code> line 7 times to read the remaining bits.</li>
+</ol>
+<p><strong><em>Note. The bits are inverted from the data line (LOW for pressed, HIGH for not pressed).</em></strong> </p>
+<p>Based on the above rules, we can create a logic in Verilog that keeps reading the button states of the NES controller in the background. To keep things simple, we use APB interface to interact with the C coding parts, and we organize the 8 button states to be in the form of an 8-bit integer in a specific APB address that can be accessed with C code.</p>
+<p><img src="/images/373_controller_data.png" alt="This figure shows the 8-bit integer data format we&#39;re using for NES controller."></p>
+<p>As we’re using 25MHz clock on our SmartFusion&reg; board, we need to extend our clock signal to $12\mu\rm{s}$. Thus, we need a clock divider.</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">9</span>:<span class="number">0</span>] clock_divider;</span><br><span class="line"><span class="keyword">assign</span> clock_divider_max = (clock_divider == <span class="number">10'd150</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> PCLK) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (~PRESERN) <span class="keyword">begin</span></span><br><span class="line">        clock_divider &lt;= <span class="number">10'd0</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (clock_divider_max) <span class="keyword">begin</span></span><br><span class="line">        clock_divider &lt;= <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">        clock_divider &lt;= clock_divider + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>Then, we need to create our logic to pulse the <code>latch</code> and <code>clock</code> signal, and get the bits from <code>data_out</code>. <strong>Whenever we read a new bit in, we need to shift all the old bits left by 1.</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">7</span>:<span class="number">0</span>] data_in, data_complete;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] read_count;</span><br><span class="line"><span class="keyword">reg</span> start, finish;</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> PCLK) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (~PRESERN) <span class="keyword">begin</span></span><br><span class="line">        latch         &lt;= <span class="number">0</span>;</span><br><span class="line">        clock         &lt;= <span class="number">0</span>;</span><br><span class="line">        start         &lt;= <span class="number">1</span>;</span><br><span class="line">        finish        &lt;= <span class="number">0</span>;</span><br><span class="line">        count         &lt;= <span class="number">5'd0</span>;</span><br><span class="line">        data_in       &lt;= <span class="number">8'd0</span>;</span><br><span class="line">        data_complete &lt;= <span class="number">8'd0</span>;</span><br><span class="line">        read_count    &lt;= <span class="number">3'd0</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">if</span> (finish == <span class="number">1</span>) <span class="keyword">begin</span></span><br><span class="line">        data_complete &lt;= data_in;</span><br><span class="line">        finish        &lt;= <span class="number">0</span>;</span><br><span class="line">        start         &lt;= <span class="number">1</span>;</span><br><span class="line">        clock         &lt;= <span class="number">0</span>;</span><br><span class="line">        data_in       &lt;= <span class="number">8'd0</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">if</span> (clock_divider_max) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span> (start == <span class="number">1</span>) <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// latch the first data</span></span><br><span class="line">            latch &lt;= <span class="number">1</span>;</span><br><span class="line">            start &lt;= <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">if</span> (latch == <span class="number">1</span>) <span class="keyword">begin</span></span><br><span class="line">            latch &lt;= <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">if</span> (clock == <span class="number">1</span>) <span class="keyword">begin</span></span><br><span class="line">            clock &lt;= <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">if</span> (data_en) <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// latch data</span></span><br><span class="line">            <span class="comment">// data are inverted bits</span></span><br><span class="line">            clock      &lt;= <span class="number">1</span>;</span><br><span class="line">            data_in[<span class="number">7</span>] &lt;= data_in[<span class="number">6</span>];</span><br><span class="line">            data_in[<span class="number">6</span>] &lt;= data_in[<span class="number">5</span>];</span><br><span class="line">            data_in[<span class="number">5</span>] &lt;= data_in[<span class="number">4</span>];</span><br><span class="line">            data_in[<span class="number">4</span>] &lt;= data_in[<span class="number">3</span>];</span><br><span class="line">            data_in[<span class="number">3</span>] &lt;= data_in[<span class="number">2</span>];</span><br><span class="line">            data_in[<span class="number">2</span>] &lt;= data_in[<span class="number">1</span>];</span><br><span class="line">            data_in[<span class="number">1</span>] &lt;= data_in[<span class="number">0</span>];</span><br><span class="line">            data_in[<span class="number">0</span>] &lt;= ~data;</span><br><span class="line">            read_count &lt;= read_count + <span class="number">1</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (read_count == <span class="number">3'd7</span>) <span class="keyword">begin</span></span><br><span class="line">                <span class="comment">// latch the last data</span></span><br><span class="line">                finish     &lt;= <span class="number">1</span>;</span><br><span class="line">                read_count &lt;= <span class="number">3'd0</span>;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="LCD-Display"><a href="#LCD-Display" class="headerlink" title="LCD Display"></a>LCD Display</h2><p>We use <a href="https://www.sparkfun.com/products/9568" target="_blank" rel="noopener">Sparkfun’s $20\times4$ serial enabled LCD display</a> in our project. The interface of this LCD is actually really simple &mdash; just UART. If you send a character <code>a</code> to it through UART, it will display an “a” on the screen; if you send a string <code>Hello World</code> to it, it will display “Hello World”.</p>
+<p><img src="/images/373Proj_lcd.jpg" alt="A typical Sparkfun&#39;s 20x4 LCD display."></p>
+<p>It is worth noticing that this LCD module displays characters based on the position of a cursor. This is very similar to writing on a text file. The character sent to the module will always be written at the position of the cursor. For instance, if the current cursor position is at the first position of the first line, the incoming character <code>a</code> will then be displayed at the first position in the first line. What is worth mentioning is that there are some special ASCII character pairs that have special meanings and have been hard-coded into the LCD module. For example, some of these special characters are:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Character Value</th>
+<th style="text-align:left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>0xFE, 0x01</code></td>
+<td style="text-align:left">Clear the entire display.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>0xFE, 0x80</code></td>
+<td style="text-align:left">Set cursor position to be the first position in the 1<sup>st</sup> line. The 20 values starting from <code>0x80</code> correspond to the cursor positions from the beginning of the 1<sup>st</sup> line to the end of the first line. For the first position in the 2<sup>nd</sup> line, add 64 to <code>0x80</code>; for the first position of the 3<sup>rd</sup> line, add 20 to <code>0x80</code>; for the first position of the 4<sup>th</sup> line, add 84 to <code>0x80</code>.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>0x12</code></td>
+<td style="text-align:left">Reset the whole module.</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>Note. Two bytes separated by a comma means a consecutive ASCII character pair.</em> For instance, <code>0xFE, 0x80</code> means <code>0xFE</code> should be first sent to the LCD module, followed by a <code>0x80</code>.</strong></p>
+<h3 id="Constructing-the-User-Menu"><a href="#Constructing-the-User-Menu" class="headerlink" title="Constructing the User Menu"></a>Constructing the User Menu</h3><p>In terms of constructing a complete user menu, we use <code>&gt;</code> as the prompt character for the selected option. We develop a data structure called <code>LCD_Display</code> to store the current contents of the 4 lines as well as the line index of the prompt character, and another <code>Menu</code> for multiple layers of the menu. For simplicity, we set each layer of the menu has a maximum size of 6.</p>
+<p><img src="/images/373_lcd_tree.png" alt></p>
+<p>For more detailed information, please visit our <a href="https://github.com/shineyruan/Don-t-Step-on-White-Tiles" target="_blank" rel="noopener">GitHub repo</a> and take a look at the <code>menu.[ch]</code> library files.</p>
+<h2 id="Pixy-Camera"><a href="#Pixy-Camera" class="headerlink" title="Pixy Camera"></a>Pixy Camera</h2><p><a href="https://pixycam.com/" target="_blank" rel="noopener">Pixy camera</a> is a small and responsive open-source camera developed by CREATE Lab, a part of the Robotics Institute at Carnegie Mellon University. It is equipped with color recognition and it can tell the location of the object in real time within its field of view. It has a very nice interface for MCU, which we can integrate into our SmartFusion&reg; board. Particularly, it is able to transmit its color recognition results to MCU via three interfaces: I2C, SPI, and UART. It is known that SPI has the highest data transmission rate among the three popular protocols, so we decide to utilize its SPI interface.</p>
+<h3 id="Porting-Guidelines"><a href="#Porting-Guidelines" class="headerlink" title="Porting Guidelines"></a>Porting Guidelines</h3><p>According to the <a href="https://docs.pixycam.com/wiki/doku.php?id=wiki:v1:porting_guide" target="_blank" rel="noopener">official documentation</a>, Pixy camera has the following available ports:</p>
+<p><img src="/images/373Proj_pixy_porting.jpg" alt="The available ports and its corresponding functionality on Pixy camera."></p>
+<p>with the numbering convention (looking at the back of Pixy):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1   2</span><br><span class="line">3   4</span><br><span class="line">5   6</span><br><span class="line">7   8</span><br><span class="line">9   10</span><br></pre></td></tr></table></figure>
+<h3 id="The-Serial-Protocol"><a href="#The-Serial-Protocol" class="headerlink" title="The Serial Protocol"></a>The Serial Protocol</h3><p><em>Signature</em> is an important feature of Pixy. A signature represents a particular color: say you may want to set a signature for color red, another signature for color blue, and another signature for color yellow, etc. An <em>object</em> is the biggest object with a corresponding signature appearing in Pixy’s field of view. That is, Pixy can hold as many objects as the signatures.</p>
+<p>The whole information containing in one single image is called a <em>frame</em>. A data frame can have several objects corresponding to several signatures. Pixy’s protocol enables itself to convey information for multiple objects of different colors at a time. More specifically, its serial protocol goes as follows:</p>
+<ol>
+<li>The information for each object is 14 bytes in little endian, with the first 2 bytes starting with <code>0xaa55</code>.</li>
+<li>Two consecutive <code>0xaa55</code> starts a new frame, with the second <code>0xaa55</code> starts the new object.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Bytes    16-bit word    Description</span><br><span class="line">----------------------------------------------------------------</span><br><span class="line">0, 1     y              sync: 0xaa55=normal object, 0xaa56=color code object</span><br><span class="line">2, 3     y              checksum (sum of all 16-bit words 2-6, that is, bytes 4-13)</span><br><span class="line">4, 5     y              signature number</span><br><span class="line">6, 7     y              x center of object</span><br><span class="line">8, 9     y              y center of object</span><br><span class="line">10, 11   y              width of object</span><br><span class="line">12, 13   y              height of object</span><br></pre></td></tr></table></figure>
+<p>Above are the information needed for us to parse Pixy’s data. But how can we transmit data to Pixy to set the signatures? Fortunately, Pixy’s group have developed a very nice software called <a href="https://pixycam.com/downloads-pixy1/" target="_blank" rel="noopener">PixyMon</a> for us to accomplish this goal. This software sets up a UART communication between PC and Pixy camera, and it can transmit data to it as soon as we click the corresponding button in the software.</p>
+<p>By the means mentioned above, we’re able to get the center of the objects with specific color within Pixy’s field of view, which is a very nice method to locate the player’s feet in our project.</p>
+<p>Meanwhile, there are also other advanced features of Pixy that we haven’t explored. For details, please visit their <a href="https://pixycam.com/" target="_blank" rel="noopener">official website</a>.</p>
+<h2 id="Sound-Board"><a href="#Sound-Board" class="headerlink" title="Sound Board"></a>Sound Board</h2><p>We use <a href="https://www.adafruit.com/product/2341" target="_blank" rel="noopener">Adafruit Audio FX Mini Sound Board</a> for playing background music.</p>
+<p><img src="/images/373Proj_soundboard.jpg" alt></p>
+<p>By plugging in the sound board into computer using USB cable, it will show up as a new USB key. Just copy music into it and music will be written properly in its memory.</p>
+<p>To trigger audio, pull down one of trigger pins - named <code>#0</code> thru <code>#10</code>. To stop audio, pull down <code>Rst</code>.</p>
+<p>The control of this board also uses the Verilog APB interface.</p>
+<h1 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h1><p>All source codes with the latest updates can be accessed in my <a href="https://github.com/shineyruan/Don-t-Step-on-White-Tiles" target="_blank" rel="noopener">GitHub repository</a>. A project directory structure is also provided below. <strong>Special thanks to Regina for her drawing the project directory structure!</strong></p>
+<p><img src="/images/373_code_tree.png" alt></p>
+<h1 id="Acknowledgements"><a href="#Acknowledgements" class="headerlink" title="Acknowledgements"></a>Acknowledgements</h1><p>For the entire work, I would like to express special thanks to:</p>
+<ul>
+<li>Prof. Sample and Prof. Smith’s support throughout the semester ☕️🥃</li>
+<li>my teammates: Shiyu, Regina and Ken’s efforts on this project 🍦🍻</li>
+<li>my own passion 🍗🍺</li>
+</ul>
+
+</div>
+
+
+      </div>
+      
+  	</div>
+
+    <!-- After footer scripts -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+  </body>
+</html>
