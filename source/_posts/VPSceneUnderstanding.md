@@ -5,3 +5,6 @@ categories: Projects
 mathjax: true
 cover_image: images/shadow1.png
 ---
+
+# Framework
+Here is the paper for the whole framework: [Overleaf](https://www.overleaf.com/read/bztnnkmnsqkb)
